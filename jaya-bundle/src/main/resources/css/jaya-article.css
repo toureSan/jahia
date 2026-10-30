@@ -1,0 +1,10 @@
+.jaya-article {
+  max-width: 68ch;
+  color: #1e1a17;
+  font-family: "Newsreader", "Iowan Old Style", Georgia, serif;
+}
+
+.jaya-article h1 {
+  font-weight: 560;
+  letter-spacing: -0.02em;
+}

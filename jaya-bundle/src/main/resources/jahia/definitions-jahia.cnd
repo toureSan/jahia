@@ -1,0 +1,8 @@
+<'jaya'='http://www.ocsin.com/jaya/1.0'>
+
+[jaya:article] > jnt:content, jmix:editorialContent
+ - jcr:title (string) i18n mandatory
+ - jaya:summary (string) i18n
+ - jaya:body (string, richtext) i18n
+ - jaya:status (string) = 'DRAFT' autocreated
+ - jaya:tags (string) multiple

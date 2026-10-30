@@ -1,0 +1,13 @@
+target/
+.idea/
+*.iml
+.classpath
+.project
+.settings/
+node_modules/
+dist/
+.DS_Store
+*.log
+data/
+jaya-ui/dist/
+.vscode/

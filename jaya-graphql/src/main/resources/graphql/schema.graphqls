@@ -1,0 +1,72 @@
+type Query {
+  article(id: ID!): Article
+  search(term: String, status: PublicationStatus, locale: String, limit: Int = 20, offset: Int = 0): SearchResult!
+  diagnostics: Diagnostics!
+}
+
+type Mutation {
+  saveArticle(input: SaveArticleInput!): Article!
+  submitArticle(id: ID!): Article!
+  publishArticle(id: ID!): Article!
+  rejectArticle(id: ID!): Article!
+  syncArticle(id: ID!): Article!
+}
+
+type Article {
+  id: ID!
+  title: String!
+  summary: String
+  body: String!
+  status: PublicationStatus!
+  locale: String!
+  tags: [String!]!
+  updatedAt: String!
+  updatedBy: String!
+  externalId: String
+  syncError: String
+}
+
+enum PublicationStatus {
+  DRAFT
+  IN_REVIEW
+  PUBLISHED
+}
+
+input SaveArticleInput {
+  id: ID
+  title: String!
+  summary: String
+  body: String!
+  locale: String
+  tags: [String!]
+}
+
+type SearchResult {
+  total: Int!
+  items: [Article!]!
+}
+
+type Diagnostics {
+  cache: CacheStats!
+  slowOperations: [SlowOperation!]!
+  operations: [OperationStats!]!
+}
+
+type CacheStats {
+  hitCount: Int!
+  missCount: Int!
+  hitRate: Float!
+  evictionCount: Int!
+}
+
+type SlowOperation {
+  name: String!
+  durationMillis: Int!
+  at: String!
+}
+
+type OperationStats {
+  name: String!
+  count: Int!
+  averageMillis: Int!
+}

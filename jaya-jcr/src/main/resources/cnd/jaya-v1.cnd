@@ -1,0 +1,12 @@
+<'jaya'='http://www.ocsin.com/jaya/1.0'>
+
+[jaya:article] > nt:base, mix:referenceable
+  - jaya:id (string) mandatory
+  - jaya:title (string) mandatory
+  - jaya:titleLower (string) mandatory
+  - jaya:body (string) mandatory
+  - jaya:status (string) mandatory
+  - jaya:locale (string) mandatory
+  - jaya:updatedAt (long) mandatory
+  - jaya:updatedBy (string) mandatory
+  - jaya:tags (string) multiple

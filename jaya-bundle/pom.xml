@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>com.ocsin.jaya</groupId>
+    <artifactId>jaya</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+  </parent>
+  <artifactId>jaya-bundle</artifactId>
+  <name>Jaya OSGi Bundle</name>
+  <description>Module OSGi déployable dans Jahia : CND, vue et service éditorial.</description>
+  <dependencies>
+    <dependency>
+      <groupId>com.ocsin.jaya</groupId>
+      <artifactId>jaya-runtime</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.osgi</groupId>
+      <artifactId>osgi.core</artifactId>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+    </dependency>
+  </dependencies>
+  <build>
+    <finalName>jaya-module</finalName>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-shade-plugin</artifactId>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>shade</goal>
+            </goals>
+            <configuration>
+              <createDependencyReducedPom>false</createDependencyReducedPom>
+              <artifactSet>
+                <includes>
+                  <include>com.ocsin.jaya:jaya-runtime</include>
+                  <include>com.ocsin.jaya:jaya-application</include>
+                  <include>com.ocsin.jaya:jaya-security</include>
+                  <include>com.ocsin.jaya:jaya-domain</include>
+                  <include>com.ocsin.jaya:jaya-jcr</include>
+                  <include>com.github.ben-manes.caffeine:caffeine</include>
+                </includes>
+              </artifactSet>
+              <filters>
+                <filter>
+                  <artifact>*:*</artifact>
+                  <excludes>
+                    <exclude>META-INF/*.SF</exclude>
+                    <exclude>META-INF/*.DSA</exclude>
+                    <exclude>META-INF/*.RSA</exclude>
+                    <exclude>META-INF/LICENSE</exclude>
+                    <exclude>META-INF/LICENSE.txt</exclude>
+                    <exclude>META-INF/NOTICE</exclude>
+                    <exclude>META-INF/NOTICE.txt</exclude>
+                    <exclude>META-INF/MANIFEST.MF</exclude>
+                  </excludes>
+                </filter>
+              </filters>
+              <transformers>
+                <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                  <manifestEntries>
+                    <Bundle-ManifestVersion>2</Bundle-ManifestVersion>
+                    <Bundle-SymbolicName>com.ocsin.jaya.bundle</Bundle-SymbolicName>
+                    <Bundle-Version>1.0.0</Bundle-Version>
+                    <Bundle-Name>Jaya Jahia Module</Bundle-Name>
+                    <Bundle-Description>Module editorial Jaya pour Jahia DX</Bundle-Description>
+                    <Service-Component>OSGI-INF/com.ocsin.jaya.osgi.JayaModule.xml</Service-Component>
+                    <Jahia-Module-Type>module</Jahia-Module-Type>
+                    <Jahia-GroupId>com.ocsin.jaya</Jahia-GroupId>
+                    <Import-Package>javax.jcr;version="[2.0,3)",javax.jcr.nodetype,javax.jcr.query,org.apache.jackrabbit.commons.cnd;resolution:=optional,org.osgi.framework;version="[1.8,2)",org.slf4j;version="[1.7,3)"</Import-Package>
+                    <Export-Package>com.ocsin.jaya.domain,com.ocsin.jaya.application,com.ocsin.jaya.application.port,com.ocsin.jaya.application.view,com.ocsin.jaya.application.perf</Export-Package>
+                  </manifestEntries>
+                </transformer>
+                <transformer implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer"/>
+              </transformers>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-failsafe-plugin</artifactId>
+        <executions>
+          <execution>
+            <goals>
+              <goal>integration-test</goal>
+              <goal>verify</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+</project>
