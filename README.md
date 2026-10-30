@@ -1,4 +1,4 @@
-# Jaya
+# Jahia
 
 Atelier éditorial pour s'exercer au métier de développeur Jahia : modules OSGi, modèle JCR, API GraphQL et REST, performance, sécurité et livraison.
 
