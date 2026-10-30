@@ -1,6 +1,6 @@
 # Jahia
 
-Atelier éditorial pour s'exercer au métier de développeur Jahia : modules OSGi, modèle JCR, API GraphQL et REST, performance, sécurité et livraison.
+Atelier éditorial Jahia : modules OSGi, modèle JCR, API GraphQL et REST, performance, sécurité et livraison.
 
 Le serveur local tourne sur Apache Jackrabbit Oak, donc `mvn verify` et `java -jar` fonctionnent sans licence Jahia. Le module `jaya-bundle` est le paquet OSGi à déposer dans Jahia DX : il publie le service éditorial, le CND et une vue JSP. La session Jahia se branche dans `JahiaSessionProvider`.
 
